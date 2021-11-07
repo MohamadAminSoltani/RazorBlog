@@ -52,6 +52,7 @@ namespace RazorBlog
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RazorBlog.Mapping;
+using RazorBlog.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace RazorBlog
 {
     public class BlogContext:DbContext
     {
+        public DbSet<Article> Articles { get; set; }
         public BlogContext(DbContextOptions<BlogContext> options):base(options)
         {
 

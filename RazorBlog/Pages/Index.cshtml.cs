@@ -1,25 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using RazorBlog.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RazorBlog.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public List<ArticleViewModel> Articles { get; set; }
+        private readonly BlogContext _context;
+        public IndexModel(BlogContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public void OnGet()
         {
-
+            Articles = _context.Articles.Select(x => new ArticleViewModel 
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Picture = x.Picture,
+                PictureAlt = x.PictureAlt,
+                PictureTitle = x.PictureTitle,
+                ShortDescription = x.ShortDescription,
+            }).OrderByDescending(x=>x.Id).ToList();
         }
     }
 }
